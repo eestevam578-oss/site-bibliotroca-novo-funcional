@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Livro - BiblioTroca</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>BiblioTroca</h1>
+                <p>Troca de livros entre alunos</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="livros.html">Livros Disponíveis</a></li>
+                    <li><a href="perfil.html" id="perfil-link" class="active">Meu Perfil</a></li>
+                    <li><a href="login.html" id="login-link">Entrar</a></li>
+                    <li><a href="#" id="logout-link" style="display: none;">Sair</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="form-section">
+        <div class="container">
+            <div class="form-container">
+                <h2>Cadastrar Novo Livro</h2>
+                <form id="form-livro" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="titulo">Título do Livro</label>
+                        <input type="text" id="titulo" name="titulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="autor">Autor</label>
+                        <input type="text" id="autor" name="autor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="disciplina">Disciplina</label>
+                        <select id="disciplina" name="disciplina" required>
+                            <option value="">Selecione a disciplina</option>
+                            <option value="Português">Português</option>
+                            <option value="Matemática">Matemática</option>
+                            <option value="História">História</option>
+                            <option value="Geografia">Geografia</option>
+                            <option value="Biologia">Biologia</option>
+                            <option value="Física">Física</option>
+                            <option value="Química">Química</option>
+                            <option value="Inglês">Inglês</option>
+                            <option value="Espanhol">Espanhol</option>
+                            <option value="Filosofia">Filosofia</option>
+                            <option value="Sociologia">Sociologia</option>
+                            <option value="Educação Física">Educação Física</option>
+                            <option value="Artes">Artes</option>
+                            <option value="Literatura">Literatura</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ano">Ano e Curso</label>
+                        <select id="ano" name="ano" required>
+                            <option value="">Selecione o ano e curso</option>
+                            <option value="1º Ano Administração">1º Ano - Administração</option>
+                            <option value="2º Ano Administração">2º Ano - Administração</option>
+                            <option value="3º Ano Administração">3º Ano - Administração</option>
+                            <option value="1º Ano Meio Ambiente">1º Ano - Meio Ambiente</option>
+                            <option value="2º Ano Meio Ambiente">2º Ano - Meio Ambiente</option>
+                            <option value="3º Ano Meio Ambiente">3º Ano - Meio Ambiente</option>
+                            <option value="1º Ano Recursos Humanos">1º Ano - Recursos Humanos</option>
+                            <option value="2º Ano Recursos Humanos">2º Ano - Recursos Humanos</option>
+                            <option value="3º Ano Recursos Humanos">3º Ano - Recursos Humanos</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="estado">Estado de Conservação</label>
+                        <select id="estado" name="estado" required>
+                            <option value="">Selecione o estado</option>
+                            <option value="Novo">Novo</option>
+                            <option value="Ótimo">Ótimo</option>
+                            <option value="Bom">Bom</option>
+                            <option value="Regular">Regular</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrição</label>
+                        <textarea id="descricao" name="descricao" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imagem-capa">Foto da Capa (obrigatória)</label>
+                        <input type="file" id="imagem-capa" name="imagem-capa" accept="image/*" required>
+                        <small>Esta foto servirá para identificar o livro.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imagem-verso">Foto do Verso (obrigatória)</label>
+                        <input type="file" id="imagem-verso" name="imagem-verso" accept="image/*" required>
+                        <small>O verso deve estar visível para verificação de carimbos.</small>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="sem-carimbo" name="sem-carimbo" required>
+                        <label for="sem-carimbo">Confirmo que o livro <strong>não possui carimbo da biblioteca</strong>. Livros com carimbo são patrimônio da escola e não podem ser trocados.</label>
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="btn">Cadastrar Livro</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BiblioTroca - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Chat de Ajuda / Informação de Troca -->
+    <div class="chat-widget" id="chat-widget">
+        <div class="chat-header" id="chat-header">
+            <span><i class="fas fa-info-circle"></i> Onde Trocar?</span>
+            <button id="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <p>Olá! Escolha o seu ano para saber onde realizar a troca de livros:</p>
+            <div class="chat-options">
+                <button class="chat-opt-btn" data-ano="1">1º Ano Médio</button>
+                <button class="chat-opt-btn" data-ano="2">2º Ano Médio</button>
+                <button class="chat-opt-btn" data-ano="3">3º Ano Médio</button>
+            </div>
+            <div id="chat-result" class="chat-result" style="display: none;">
+                <!-- O resultado aparecerá aqui -->
+            </div>
+        </div>
+    </div>
+    <button id="open-chat-btn" class="open-chat-btn">
+        <i class="fas fa-comments"></i>
+        <span>Onde Trocar?</span>
+        <span class="novelty-indicator"><i class="fas fa-exclamation"></i></span>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

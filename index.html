@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioTroca - Troca de Livros Escolar</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>BiblioTroca</h1>
+                <p>Troca de livros entre alunos</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="livros.html">Livros Disponíveis</a></li>
+                    <li><a href="perfil.html" id="perfil-link">Meu Perfil</a></li>
+                    <li><a href="login.html" id="login-link">Entrar</a></li>
+                    <li><a href="#" id="logout-link" style="display: none;">Sair</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Bem-vindo ao BiblioTroca!</h2>
+            <p>Compartilhe conhecimento através da troca de livros com outros alunos da escola.</p>
+            <div class="buttons">
+                <a href="login.html" class="btn">Entrar</a>
+                <a href="cadastro.html" class="btn btn-outline">Cadastrar</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Como Funciona</h2>
+            <div class="feature-cards">
+                <div class="card">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>Cadastre-se</h3>
+                    <p>Crie sua conta com informações básicas e da sua turma.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-book"></i>
+                    <h3>Cadastre seus Livros</h3>
+                    <p>Adicione os livros que você deseja trocar.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-search"></i>
+                    <h3>Encontre Livros</h3>
+                    <p>Procure por livros disponíveis de outros alunos.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3>Faça a Troca</h3>
+                    <p>Solicite a troca e combine com o outro aluno.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="container">
+            <h2>Sobre o BiblioTroca</h2>
+            <p>O BiblioTroca é uma plataforma desenvolvida para facilitar a troca de livros entre os alunos do Ensino Médio (1º ao 3º ano). Nosso objetivo é promover a leitura, o compartilhamento de conhecimento e a economia de recursos.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BiblioTroca - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Chat de Ajuda / Informação de Troca -->
+    <div class="chat-widget" id="chat-widget">
+        <div class="chat-header" id="chat-header">
+            <span><i class="fas fa-info-circle"></i> Onde Trocar?</span>
+            <button id="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <p>Olá! Escolha o seu ano para saber onde realizar a troca de livros:</p>
+            <div class="chat-options">
+                <button class="chat-opt-btn" data-ano="1">1º Ano Médio</button>
+                <button class="chat-opt-btn" data-ano="2">2º Ano Médio</button>
+                <button class="chat-opt-btn" data-ano="3">3º Ano Médio</button>
+            </div>
+            <div id="chat-result" class="chat-result" style="display: none;">
+                <!-- O resultado aparecerá aqui -->
+            </div>
+        </div>
+    </div>
+    <button id="open-chat-btn" class="open-chat-btn">
+        <i class="fas fa-comments"></i>
+        <span>Onde Trocar?</span>
+        <span class="novelty-indicator"><i class="fas fa-exclamation"></i></span>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

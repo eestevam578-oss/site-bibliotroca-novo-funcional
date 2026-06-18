@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - BiblioTroca</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>BiblioTroca</h1>
+                <p>Troca de livros entre alunos</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="livros.html">Livros Disponíveis</a></li>
+                    <li><a href="perfil.html" id="perfil-link">Meu Perfil</a></li>
+                    <li><a href="login.html" id="login-link">Entrar</a></li>
+                    <li><a href="#" id="logout-link" style="display: none;">Sair</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="form-section">
+        <div class="container">
+            <div class="form-container">
+                <h2>Cadastre-se</h2>
+                <form id="form-cadastro" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail institucional ou pessoal</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="senha" name="senha" required>
+                            <button type="button" class="toggle-password" data-target="senha">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Número de telefone com WhatsApp</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataNascimento">Data de nascimento</label>
+                        <input type="date" id="dataNascimento" name="dataNascimento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fotoPerfil">Foto de perfil (opcional)</label>
+                        <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="serie">Série/Ano</label>
+                        <select id="serie" name="serie" required>
+                            <option value="">Selecione a série</option>
+                            <option value="1º Ano">1º Ano do Ensino Médio</option>
+                            <option value="2º Ano">2º Ano do Ensino Médio</option>
+                            <option value="3º Ano">3º Ano do Ensino Médio</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="turma">Turma / Sala</label>
+                        <select id="turma" name="turma" required>
+                            <option value="">Selecione a turma</option>
+                            <option value="1 Administração">1 Administração</option>
+                            <option value="2 Administração">2 Administração</option>
+                            <option value="3 Administração">3 Administração</option>
+                            <option value="1 Meio Ambiente">1 Meio Ambiente</option>
+                            <option value="2 Meio Ambiente">2 Meio Ambiente</option>
+                            <option value="3 Meio Ambiente">3 Meio Ambiente</option>
+                            <option value="1 Recursos Humanos">1 Recursos Humanos</option>
+                            <option value="2 Recursos Humanos">2 Recursos Humanos</option>
+                            <option value="3 Recursos Humanos">3 Recursos Humanos</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="turno">Turno</label>
+                        <select id="turno" name="turno" required>
+                            <option value="">Selecione o turno</option>
+                            <option value="Manhã">Manhã</option>
+                            <option value="Noite">Noite</option>
+                        </select>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="termos" name="termos" required>
+                        <label for="termos">Aceito os <a href="termos.html" target="_blank" style="color: #3498db; text-decoration: underline;"><strong>Termos de Uso</strong></a> e a <strong>Política de Privacidade</strong></label>
+                    </div>
+                    <div class="form-footer">
+                        <button type="submit" class="btn">Cadastrar</button>
+                        <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BiblioTroca - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Chat de Ajuda / Informação de Troca -->
+    <div class="chat-widget" id="chat-widget">
+        <div class="chat-header" id="chat-header">
+            <span><i class="fas fa-info-circle"></i> Onde Trocar?</span>
+            <button id="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <p>Olá! Escolha o seu ano para saber onde realizar a troca de livros:</p>
+            <div class="chat-options">
+                <button class="chat-opt-btn" data-ano="1">1º Ano Médio</button>
+                <button class="chat-opt-btn" data-ano="2">2º Ano Médio</button>
+                <button class="chat-opt-btn" data-ano="3">3º Ano Médio</button>
+            </div>
+            <div id="chat-result" class="chat-result" style="display: none;">
+                <!-- O resultado aparecerá aqui -->
+            </div>
+        </div>
+    </div>
+    <button id="open-chat-btn" class="open-chat-btn">
+        <i class="fas fa-comments"></i>
+        <span>Onde Trocar?</span>
+        <span class="novelty-indicator"><i class="fas fa-exclamation"></i></span>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

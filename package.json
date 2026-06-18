@@ -1,0 +1,17 @@
+{
+  "name": "biblio-troca-backend",
+  "version": "1.0.0",
+  "description": "Backend simples para BiblioTroca - Express + SQLite + upload de imagens",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "helmet": "^6.0.1",
+    "express-rate-limit": "^6.7.0",
+    "multer": "^1.4.5-lts.1",
+    "sqlite3": "^5.1.6"
+  }
+}
