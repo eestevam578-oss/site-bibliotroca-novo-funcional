@@ -118,7 +118,7 @@ async function processOutbox() {
                 formData.append('imagem', item.imagemBlob, item.imagemName || 'imagem.jpg');
             }
 
-            const resp = await fetch(`${BACKEND_URL}/api/livros', { method: 'POST', body: formData });
+            const resp = await fetch(`${BACKEND_URL}/api/livros`, { method: 'POST', body: formData });
             if (resp.ok) {
                 const saved = await resp.json();
                 // update local 'livros' record with server info
@@ -295,7 +295,7 @@ function verificarLogin() {
 // Função para cadastrar usuário
 async function cadastrarUsuario(formData) {
     try {
-        const resp = await fetch(`${BACKEND_URL}/api/usuarios', {
+        const resp = await fetch(`${BACKEND_URL}/api/usuarios`, {
             method: 'POST',
             body: formData
         });
@@ -354,7 +354,7 @@ async function fazerLogin(email, senha) {
     const cleanSenha = senha.trim();
 
     try {
-        const resp = await fetch(`${BACKEND_URL}/api/login', {
+        const resp = await fetch(`${BACKEND_URL}/api/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: cleanEmail, senha: cleanSenha })
@@ -475,7 +475,7 @@ async function solicitarTroca(livroId) {
     
     // Tentar enviar e-mail para o proprietário via API
     try {
-        await fetch(`${BACKEND_URL}/api/notificar-troca', {
+        await fetch(`${BACKEND_URL}/api/notificar-troca`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -540,7 +540,7 @@ async function responderSolicitacaoTroca(trocaId, aceitar) {
             const serverId = livro.serverId || (typeof livro.id === 'number' ? livro.id : null);
             if (serverId) {
                 try {
-                    await fetch(`/api/livros/${serverId}/indisponivel`, { method: 'PUT' });
+                    await fetch(`${BACKEND_URL}/api/livros/${serverId}/indisponivel`, { method: 'PUT' });
                 } catch (err) {
                     console.error('Erro ao atualizar status no servidor:', err);
                 }
@@ -733,7 +733,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     formData.append('nomeUsuario', usuarioLogado.nome);
                 }
 
-                const resp = await fetch(`${BACKEND_URL}/api/livros', {
+                const resp = await fetch(`${BACKEND_URL}/api/livros`, {
                     method: 'POST',
                     body: formData
                 });
@@ -796,7 +796,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (livrosContainer) {
         // Try to fetch from backend first
         try {
-            const resp = await fetch(`${BACKEND_URL}/api/livros');
+            const resp = await fetch(`${BACKEND_URL}/api/livros`);
             if (!resp.ok) throw new Error('Servidor indisponível');
             const livrosDisponiveis = await resp.json();
 
@@ -1057,7 +1057,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     const formData = new FormData();
                     formData.append('fotoPerfil', file);
                     
-                    const resp = await fetch(`/api/usuarios/${usuarioLogado.id}/foto-perfil`, {
+                    const resp = await fetch(`${BACKEND_URL}/api/usuarios/${usuarioLogado.id}/foto-perfil`, {
                         method: 'PUT',
                         body: formData
                     });
@@ -1129,7 +1129,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             // Tentar buscar do servidor primeiro
             if (usuarioLogado) {
                 try {
-                    const resp = await fetch(`${BACKEND_URL}/api/livros');
+                    const resp = await fetch(`${BACKEND_URL}/api/livros`);
                     if (resp.ok) {
                         const todosLivros = await resp.json();
                         // Filtrar livros do usuário logado
@@ -1239,7 +1239,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             
             // Tentar deletar via API
             try {
-                const resp = await fetch(`/api/admin/livros/${id}`, { method: 'DELETE' });
+                const resp = await fetch(`${BACKEND_URL}/api/admin/livros/${id}`, { method: 'DELETE' });
                 if (resp.ok) {
                     console.log('Livro excluído do servidor');
                 }

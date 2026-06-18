@@ -1,0 +1,5 @@
+node_modules/
+biblio.db
+uploads/
+.env
+.DS_Store
