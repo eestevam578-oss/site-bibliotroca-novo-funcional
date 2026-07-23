@@ -1,5 +1,7 @@
-// URL do backend (atualize para a URL do Render quando fizer o deploy!)
-const BACKEND_URL = ''; // Ex: 'https://bibliotroca-backend.onrender.com'
+// URL do backend - muda automaticamente baseado no ambiente
+const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:3000'
+  : window.location.origin;
 
 // Funções para gerenciamento de usuários
 let usuariosRegistrados = JSON.parse(localStorage.getItem('usuarios')) || [];
@@ -688,7 +690,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
 
-
     
     // Inicializar formulário de cadastro de livro
     const formLivro = document.getElementById('form-livro');
@@ -791,7 +792,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
     
-        // Inicializar página de livros disponíveis
+    // Inicializar página de livros disponíveis
     const livrosContainer = document.getElementById('livros-disponiveis');
     if (livrosContainer) {
         // Try to fetch from backend first
