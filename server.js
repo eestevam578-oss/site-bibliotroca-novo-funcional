@@ -139,8 +139,8 @@ db.serialize(() => {
   // Create default admin user if it doesn't exist
   db.get('SELECT * FROM usuarios WHERE email = ?', ['admin@bibliotroca.com'], (err, row) => {
     if (!row) {
-      db.run('INSERT INTO usuarios (nome, email, senha, turma, isAdmin) VALUES (?, ?, ?, ?, ?)', 
-        ['Administrador', 'admin@bibliotroca.com', 'admin123', 'Sistema', 1]);
+      db.run('INSERT INTO usuarios (nome, email, senha, turma, isAdmin, telefone, dataNascimento, serie, turno, termosAceitos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+        ['Administrador', 'admin@bibliotroca.com', 'admin123', 'Sistema', 1, '(00) 00000-0000', '2000-01-01', '3º Ano', 'Manhã', 1]);
     }
   });
 });
