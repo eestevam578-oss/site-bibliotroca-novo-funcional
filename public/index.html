@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bibliotroca + Supabase (exemplo)</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width:800px; margin:32px auto; padding:0 16px; }
+    input, button { padding:8px; margin:4px 0; }
+    #books { margin-top:16px; }
+  </style>
+</head>
+<body>
+  <h1>Bibliotroca — Exemplo Supabase</h1>
+
+  <div id="auth">
+    <h2>Autenticação</h2>
+    <input id="email" placeholder="email" />
+    <input id="password" type="password" placeholder="senha" />
+    <button id="signup">Criar conta</button>
+    <button id="signin">Entrar</button>
+    <button id="signout">Sair</button>
+    <div id="user"></div>
+  </div>
+
+  <div id="add">
+    <h2>Adicionar livro</h2>
+    <input id="title" placeholder="Título" />
+    <input id="author" placeholder="Autor" />
+    <button id="addBook">Adicionar</button>
+  </div>
+
+  <div id="books">
+    <h2>Livros</h2>
+    <ul id="booksList"></ul>
+  </div>
+
+  <!-- CDN do supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/supabase.min.js"></script>
+  <script>
+    // Substitua abaixo com os valores do seu projeto Supabase
+    const SUPABASE_URL = 'https://SEU_PROJETO.supabase.co';
+    const SUPABASE_ANON_KEY = 'SEU_SUPABASE_ANON_KEY';
+
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Elementos
+    const booksList = document.getElementById('booksList');
+    const emailEl = document.getElementById('email');
+    const passwordEl = document.getElementById('password');
+    const userEl = document.getElementById('user');
+
+    // Mostrar usuário logado
+    async function updateUserInfo() {
+      try {
+        const {
+          data: { user }
+        } = await supabase.auth.getUser();
+        userEl.textContent = user ? `Logado: ${user.email}` : 'Anônimo';
+      } catch (err) {
+        userEl.textContent = 'Anônimo';
+      }
+    }
+    updateUserInfo();
+
+    // Ler livros
+    async function loadBooks() {
+      const { data, error } = await supabase
+        .from('books')
+        .select('*')
+        .order('id', { ascending: true });
+
+      if (error) {
+        console.error('Erro ao carregar livros:', error);
+        return;
+      }
+
+      booksList.innerHTML = '';
+      data.forEach(b => {
+        const li = document.createElement('li');
+        li.textContent = `${b.title} — ${b.author}`;
+        booksList.appendChild(li);
+      });
+    }
+
+    // Adicionar livro
+    document.getElementById('addBook').addEventListener('click', async () => {
+      const title = document.getElementById('title').value;
+      const author = document.getElementById('author').value;
+      if (!title) return alert('Informe o título');
+
+      const { data, error } = await supabase
+        .from('books')
+        .insert([{ title, author }]);
+
+      if (error) {
+        console.error('Erro ao inserir:', error);
+        alert('Erro ao adicionar (veja console)');
+      } else {
+        document.getElementById('title').value = '';
+        document.getElementById('author').value = '';
+        loadBooks();
+      }
+    });
+
+    // Signup / Signin / Signout
+    document.getElementById('signup').addEventListener('click', async () => {
+      const email = emailEl.value;
+      const password = passwordEl.value;
+      const { data, error } = await supabase.auth.signUp({ email, password });
+      if (error) alert(error.message); else updateUserInfo();
+    });
+
+    document.getElementById('signin').addEventListener('click', async () => {
+      const email = emailEl.value;
+      const password = passwordEl.value;
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) alert(error.message); else updateUserInfo();
+    });
+
+    document.getElementById('signout').addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      updateUserInfo();
+    });
+
+    // Inicial load
+    loadBooks();
+
+    // Escutar mudanças de auth
+    supabase.auth.onAuthStateChange((event, session) => {
+      updateUserInfo();
+    });
+  </script>
+</body>
+</html>
